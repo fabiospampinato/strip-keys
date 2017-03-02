@@ -36,6 +36,10 @@ stripKeys ( obj, ['secret', 'bar'] ); // { foo: true, sub: {} }
 
 Removes a key, or an array of keys, deeply or not, from an object, without mutating the original object.
 
+## Related
+
+- [json-strip-loader](https://github.com/fabiospampinato/json-strip-loader) - JSON loader for Webpack, with support for keys stripping, useful in isomorphic builds for storing secrets in JSON files.
+
 ## License
 
 MIT © Fabio Spampinato
