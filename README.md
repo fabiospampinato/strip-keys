@@ -1,8 +1,5 @@
 # Strip Keys
 
-![Issues](https://img.shields.io/github/issues/fabiospampinato/strip-keys.svg)
-[![NPM version](https://img.shields.io/npm/v/strip-keys.svg)](https://www.npmjs.com/package/strip-keys)
-
 An utility for removing specific keys from an object.
 
 ## Install
