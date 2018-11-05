@@ -1,19 +1,21 @@
 
 /* IMPORT */
 
-import * as _ from 'lodash';
+import castArray = require ( 'lodash/castArray' );
+import isPlainObject = require ( 'lodash/isPlainObject' );
+import transform = require ( 'lodash/transform' );
 
 /* STRIP KEYS */
 
 function stripKeys ( obj: {}, keys: string | string[], deep: boolean = true ) {
 
-  keys = _.castArray ( keys );
+  keys = castArray ( keys );
 
-  return _.transform ( obj, ( acc, value, key: string ) => {
+  return transform ( obj, ( acc, value, key: string ) => {
 
     if ( keys.includes ( key ) ) return;
 
-    if ( deep && _.isPlainObject ( value ) ) {
+    if ( deep && isPlainObject ( value ) ) {
 
       acc[key] = stripKeys ( value, keys, deep );
 
