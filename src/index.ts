@@ -29,4 +29,4 @@ function stripKeys ( obj: {}, keys: string | string[], deep: boolean = true ) {
 
 /* EXPORT */
 
-export default stripKeys;
+export = Object.assign ( stripKeys, { default: stripKeys } );
