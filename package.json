@@ -1,7 +1,7 @@
 {
   "name": "strip-keys",
   "repository": "github:fabiospampinato/strip-keys",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "description": "An utility for removing specific keys from an object.",
   "type": "module",
   "main": "dist/index.js",
