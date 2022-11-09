@@ -4,8 +4,8 @@ An utility for removing specific keys from an object.
 
 ## Install
 
-```shell
-$ npm install --save strip-keys
+```
+npm install --save strip-keys
 ```
 
 ## Usage
@@ -32,10 +32,6 @@ stripKeys ( obj, ['secret', 'bar'] ); // { foo: true, sub: {} }
 ### `stripKeys ( obj, keys: string | string[], deep: boolean = true )`
 
 Removes a key, or an array of keys, deeply or not, from an object, without mutating the original object.
-
-## Related
-
-- [json-strip-loader](https://github.com/fabiospampinato/json-strip-loader) - JSON loader for Webpack, with support for keys stripping, useful in isomorphic builds for storing secrets in JSON files.
 
 ## License
 

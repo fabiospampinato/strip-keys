@@ -1,33 +1,47 @@
 
 /* IMPORT */
 
-import castArray = require ( 'lodash/castArray' );
-import isPlainObject = require ( 'lodash/isPlainObject' );
-import transform = require ( 'lodash/transform' );
+import {isPlainObject} from './utils';
 
-/* STRIP KEYS */
+/* MAIN */
 
-function stripKeys ( obj: {}, keys: string | string[], deep: boolean = true ) {
+//FIXME: The return type isn't exactly right
 
-  keys = castArray ( keys );
+const stripKeys = <T extends {}> ( obj: T, key: string | string[], deep: boolean = true ): T => {
 
-  return transform ( obj, ( acc, value, key: string ) => {
+  if ( !isPlainObject ( obj ) ) return obj;
 
-    if ( keys.includes ( key ) ) return;
+  const keys = Array.isArray ( key ) ? key : [key];
 
-    if ( deep && isPlainObject ( value ) ) {
+  const strip = <T extends {}> ( obj: T ): T => {
 
-      acc[key] = stripKeys ( value, keys, deep );
+    const clone = {} as T; //TSC
 
-    } else {
+    for ( const key in obj ) {
 
-      acc[key] = value;
+      if ( keys.includes ( key ) ) continue;
+
+      const value = obj[key];
+
+      if ( deep && isPlainObject ( value ) ) {
+
+        clone[key] = strip ( value );
+
+      } else {
+
+        clone[key] = value;
+
+      }
 
     }
 
-  }, {} );
+    return clone;
 
-}
+  };
+
+  return strip ( obj );
+
+};
 
 /* EXPORT */
 

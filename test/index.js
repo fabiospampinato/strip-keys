@@ -1,18 +1,17 @@
 
 /* IMPORT */
 
-import * as _ from 'lodash';
-import {describe} from 'ava-spec';
-import stripKeys from '../dist';
+import {describe} from 'fava';
+import stripKeys from '../dist/index.js';
 
-/* STRIP KEYS */
+/* MAIN */
 
 describe ( 'stripKeys', it => {
 
   it ( 'Removes a single key', t => {
 
-    const complete = { a: 0, b: 1, c: 2 },
-          stripped = { a: 0, b: 1 };
+    const complete = { a: 0, b: 1, c: 2 };
+    const stripped = { a: 0, b: 1 };
 
     t.deepEqual ( stripKeys ( complete, 'c' ), stripped );
 
@@ -20,8 +19,8 @@ describe ( 'stripKeys', it => {
 
   it ( 'Removes an array of keys', t => {
 
-    const complete = { a: 0, b: 1, c: 2 },
-          stripped = { b: 1 };
+    const complete = { a: 0, b: 1, c: 2 };
+    const stripped = { b: 1 };
 
     t.deepEqual ( stripKeys ( complete, ['a', 'c'] ), stripped );
 
@@ -29,8 +28,8 @@ describe ( 'stripKeys', it => {
 
   it ( 'Supports deep removal', t => {
 
-    const complete = { a: 0, b: 1, c: { b: 1, c: { b: 1, d: 3 } } },
-          stripped = { a: 0, c: { c: { d: 3 } } };
+    const complete = { a: 0, b: 1, c: { b: 1, c: { b: 1, d: 3 } } };
+    const stripped = { a: 0, c: { c: { d: 3 } } };
 
     t.deepEqual ( stripKeys ( complete, 'b' ), stripped );
 
@@ -38,8 +37,8 @@ describe ( 'stripKeys', it => {
 
   it ( 'Supports non-deep removal', t => {
 
-    const complete = { a: 0, b: 1, c: { b: 1, c: { b: 1, d: 3 } } },
-          stripped = { a: 0, c: { b: 1, c: { b: 1, d: 3 } } };
+    const complete = { a: 0, b: 1, c: { b: 1, c: { b: 1, d: 3 } } };
+    const stripped = { a: 0, c: { b: 1, c: { b: 1, d: 3 } } };
 
     t.deepEqual ( stripKeys ( complete, 'b', false ), stripped );
 
@@ -47,10 +46,10 @@ describe ( 'stripKeys', it => {
 
   it ( 'Doesn\'t mutate the original object', t => {
 
-    const complete = { a: 0, b: 1, c: 2 },
-          original = _.cloneDeep ( complete ),
-          stripped = { a: 0, b: 1 },
-          result = stripKeys ( complete, 'c' );
+    const complete = { a: 0, b: 1, c: 2 };
+    const original = JSON.parse ( JSON.stringify ( complete ) );
+    const stripped = { a: 0, b: 1 };
+    const result = stripKeys ( complete, 'c' );
 
     t.deepEqual ( result, stripped );
     t.deepEqual ( complete, original );
