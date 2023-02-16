@@ -11,7 +11,7 @@ const stripKeys = <T extends {}> ( obj: T, key: string | string[], deep: boolean
 
   if ( !isPlainObject ( obj ) ) return obj;
 
-  const keys = Array.isArray ( key ) ? key : [key];
+  const keys = new Set ( Array.isArray ( key ) ? key : [key] );
 
   const strip = <T extends {}> ( obj: T ): T => {
 
@@ -19,7 +19,7 @@ const stripKeys = <T extends {}> ( obj: T, key: string | string[], deep: boolean
 
     for ( const key in obj ) {
 
-      if ( keys.includes ( key ) ) continue;
+      if ( keys.has ( key ) ) continue;
 
       const value = obj[key];
 
